@@ -8,7 +8,7 @@ export default function PlaceCard(props) {
             <div className="infoSection">
                 <p className="title"></p>
                 <div className="time">
-                    <img src="" alt="" />
+                    <img src={props.image} alt="" />
                     <p></p>
                 </div>
                 <div className="programList">
