@@ -1,0 +1,94 @@
+.cardContainer {
+    display: flex;
+    border: 0.5px solid #8E8E8E;
+    border-radius: 16px;
+    overflow: hidden;
+}
+.imageSection {
+    position: relative;
+    min-width: calc((473px / 1070px) * 100%);
+    max-width: calc((473px / 1070px) * 100%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    & div {
+        position: absolute;
+        z-index: 1;
+        top: 46px;
+        padding: 14px 35px;
+        background-color: #099CE8;
+        color: #fff;
+        font-weight: 600;
+    }
+}
+.infoSection {
+    padding: 16px 23px 20px;
+    & .title {
+        font-size: 1.8em;
+        font-weight: 300;
+        line-height: 1.3em;
+        margin: 0 0 11px;
+    }
+    & .time {
+        display: flex;
+        align-items: center;
+        column-gap: 6px;
+        & p {
+            color: #9E9E9E;
+            font-weight: 200;
+        }
+        & img { width: 16px; }
+    }
+}
+.programList {
+    display: flex;
+    flex-direction: column;
+    row-gap: 11px;
+    margin: 10px 0;
+    font-size: 1.15em;
+    font-weight: 200;
+    & li {
+        list-style-position: inside;
+        list-style-image: url("../../public/icons/marker.svg");
+        & div { 
+            display: flex;
+            align-items: center;
+            column-gap: 6px;
+            & p {
+                padding: 4px 15px;
+                background-color: #C5DCFF;
+                border-radius: 11px;
+                font-size: 1em;
+                transition: all .3s;
+                &:hover {
+                    cursor: pointer;
+                    background-color: #6BA6FF;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
+.priceSection {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+    & .onlinePrice {
+        font-size: 2.57em;
+        line-height: 1.2em;
+        font-weight: 300;
+    }
+    & .offlinePrice { font-weight: 200; }
+    & button {
+        border: none;
+        font-size: 1.14em;
+        font-weight: 200;
+        padding: 15px 40px;
+        border-radius: 23px;
+        background-color: #FFD83C;
+        transition: all .3s;
+        &:hover {
+            background-color: #f5d03c;
+            color: #fff;
+        }
+    }
+}

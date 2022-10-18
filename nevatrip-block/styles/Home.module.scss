@@ -1,0 +1,10 @@
+.container {
+    margin: 0 auto;
+    padding: 67px 0;
+    width: 1070px;
+    & .cardsList {
+        display: flex;
+        flex-direction: column;
+        row-gap: 65px;
+    }
+}
