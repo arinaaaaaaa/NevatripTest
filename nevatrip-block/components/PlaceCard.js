@@ -20,21 +20,29 @@ export default function PlaceCard(props) {
                     <img src="icons/time.svg" alt="" />
                     <p>{props.time}</p>
                 </div>
-                <ul className={styles.programList}>
+                <div className={styles.programList}>
                     {
                         props.list ? props.list.map((item) => 
-                            props.list[props.list.length - 1] !== item ? <li className={styles.item}>{item}</li> :
-                            <li className={styles.item}>
-                                <div>
+                            props.list[props.list.length - 1] !== item ?
+                            <div className={styles.item}>
+                                <img src="icons/marker.svg" alt="" />
+                                {item}
+                            </div>
+                            :
+                            <div className={styles.item}>
+                                <img src="icons/marker.svg" alt="" />
+                                <div className={styles.nearTime}>
                                     {item}
-                                    {props.times ? props.times.map((time) => 
-                                        <p>{time}</p>
-                                    ) : null}
+                                    <div className={styles.times}>
+                                        {props.times ? props.times.map((time) => 
+                                            <p>{time}</p>
+                                        ) : null}
+                                    </div>
                                 </div>
-                            </li>
+                            </div>
                         ) : null
                     }
-                </ul>
+                </div>
                 <div className={styles.priceSection}>
                     <span>
                         <div className={styles.onlinePrice}>

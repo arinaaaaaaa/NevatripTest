@@ -1,7 +1,9 @@
+/* Nulluble styles */
 * {
   padding: 0;
   margin: 0;
   border: 0;
+  box-sizing: border-box;
 
   &, &::before, &::after {
     -moz-box-sizing: border-box;
@@ -15,7 +17,6 @@ html, body {
   width: 100%;
   font-size: 100%;
   line-height: 1;
-  font-size: 14px;
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -31,3 +32,23 @@ a, a:visited, a:hover { text-decoration: none; }
 ul li { list-style: none; }
 img { vertical-align: top; }
 h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: 400; }
+
+/* Adaptivity Section */
+@media (min-width: 1920px), (max-width: 1920px) {
+  html, body { font-size: 18px; }
+}
+@media (max-width: 1440px) {
+  html, body { font-size: 14px; }
+}
+@media (max-width: 1210px) {
+  html, body { font-size: 12px; }
+}
+@media (max-width: 980px) {
+  html, body { font-size: 10px; }
+}
+@media (max-width: 760px) {
+  html, body { font-size: 8px; }
+}
+@media (max-width: 580px) {
+  html, body { font-size: 16px; }
+}
