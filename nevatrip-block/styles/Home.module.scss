@@ -66,3 +66,12 @@
         }
     }
 }
+@media (max-width: 420px) {
+    .container {
+        padding: 40px 0;
+        width: 340px;
+        & .cardsList {
+            row-gap: 30px;
+        }
+    }
+}

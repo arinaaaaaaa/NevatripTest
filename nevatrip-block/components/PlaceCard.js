@@ -8,6 +8,21 @@ function setFlagColor() {
     }
 }
 
+function getTime(times) {
+    let shownTimes = []
+
+    if (times.length <= 3) shownTimes = times
+    else shownTimes = times.slice(0,2)
+
+    
+    return (
+        <div className={styles.times}>
+            {shownTimes.map((time) => <p>{time}</p>)}
+            {shownTimes.length === 2 && times.length !== 2 ? <p>ещё...</p> : null}
+        </div>
+    )
+} 
+
 export default function PlaceCard(props) {
     return (
         <div className={styles.cardContainer}>
@@ -33,11 +48,7 @@ export default function PlaceCard(props) {
                                 <img src="icons/marker.svg" alt="" />
                                 <div className={styles.nearTime}>
                                     {item}
-                                    <div className={styles.times}>
-                                        {props.times ? props.times.map((time) => 
-                                            <p>{time}</p>
-                                        ) : null}
-                                    </div>
+                                    {props.times ? getTime(props.times) : null}
                                 </div>
                             </div>
                         ) : null

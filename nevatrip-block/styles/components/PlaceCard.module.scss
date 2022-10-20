@@ -76,12 +76,13 @@
     & button {
         border: none;
         font-size: 1.14em;
-        font-weight: 200;
+        font-weight: 300;
         border-radius: 23px;
+        color: #404040;
         background-color: #FFD83C;
         transition: all .3s;
         &:hover {
-            background-color: #f5d03c;
+            background-color: #CBA500;
             color: #fff;
         }
     }
@@ -264,13 +265,12 @@
 }
 
 @media (max-width: 580px) {
-    .cardContainer {
-        flex-direction: column;
-    }
+    .cardContainer { flex-direction: column; }
     .imageSection {
         height: 260px;
         min-width: 100%;
         & div {
+            font-size: 0.86em;
             top: 45px;
             padding: 14px 28px;
         }
@@ -293,15 +293,16 @@
             align-items: baseline;
             width: 100%;
             & img {
-                width: 16px;
-                margin: 0 22px 0 0;
+                width: 18px;
+                margin: 0 20px 0 0;
             }
             & .nearTime {
                 flex-direction: column;
                 align-items: start;
                 & .times { margin: 7px 0 0; }
                 & p {
-                    padding: 8px 15px;
+                    font-size: 1em;
+                    padding: 4px 18px;
                     margin: 0 0 0 10px;
                     &:first-child { margin: 0; }
                 }
@@ -309,7 +310,48 @@
         }
     }
     .priceSection {
-        column-gap: 8px;
-        & button { padding: 10px 28px; }
+        justify-content: space-between;
+        & .onlinePrice { font-size: 2.14em; }
+        & .offlinePrice { font-size: 0.71em; }
+        & button {
+            border: 0.5px solid #CBA500;
+            font-size: 1em;
+            border-radius: 20px;
+            padding: 18px 45px;
+        }
     }
+}
+
+@media (max-width: 420px) {
+    .imageSection {
+        height: 220px;
+        & div {
+            top: 40px;
+            padding: 12px 18px;
+        }
+    }
+    .infoSection {
+        padding: 16px 12px 20px;
+        & .time {
+            column-gap: 9px;
+            & img { width: 16px; }
+        }
+    }
+    .programList {
+        row-gap: 10px;
+        & .item {
+            & img {
+                width: 16px;
+                margin: 0 20px 0 0;
+            }
+            & .nearTime {
+                & .times { margin: 7px 0 0; }
+                & p {
+                    padding: 2px 14px;
+                    margin: 0 0 0 7px;
+                }
+            }
+        }
+    }
+    .priceSection button { padding: 13px 44px; }
 }
