@@ -363,7 +363,19 @@ html{
 
 /* Fixes */
 .blog { box-sizing: border-box;}
+.tableContainer2 { margin: 20px 0 0;}
 
 @media (max-width: 400px) {
   .tableContainer { overflow-x: auto;}
+  .tableContainer2 tr, .tableContainer2 td {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+    border: none !important;
+  }
+  .tableContainer2 td {
+    padding: 10px 0;
+    border-bottom: 1px solid !important;
+  }
+  .tableContainer2 tbody { height: auto !important;}
 }
