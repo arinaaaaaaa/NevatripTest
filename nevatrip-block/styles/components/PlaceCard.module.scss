@@ -16,6 +16,7 @@
         background-color: #099CE8;
         color: #fff;
         font-weight: 600;
+        transition: all .5s;
     }
 }
 .infoSection {
@@ -41,10 +42,17 @@
     & .item {
         display: flex;
         align-items: center;
-        .nearTime {
+        & li {
+            padding-left: 2rem;
+            background: url('../../public/icons/marker.svg');
+            background-position: 0 0;
+            background-size: 16px;
+            background-repeat: no-repeat;
+        }
+        & .nearTime {
             display: flex;
             align-items: center;
-            & p {
+            & .timeItem, & button {
                 display: flex;
                 align-items: center;
                 border: none;
@@ -60,7 +68,14 @@
                     color: #fff
                 }
             }
-            & .times { display: flex; }
+            & .times {
+                display: flex;
+                flex-wrap: wrap;
+            }
+        }
+        & p {
+            display: flex;
+            flex-shrink: 0;
         }
     }
 }
@@ -108,14 +123,13 @@
         row-gap: 15px;
         margin: 15px 0 25px;
         & .item {
-            & img {
-                width: 20px;
-                margin: 0 20px 0 0;
+            & li {
+                padding-left: 2rem;
+                background-size: 22px;
             }
-            & p {
-                padding: 6px 20px;
-                margin: 0 0 0 10px;
-            }
+            & .nearTime li { margin-right: 8px;}
+            & .times { gap: 8px; }
+            & .timeItem, & button { padding: 6px 20px; }
         }
     }
     .priceSection {
@@ -143,14 +157,10 @@
         row-gap: 11px;
         margin: 10px 0 20px;
         & .item {
-            & img {
-                width: 16px;
-                margin: 0 14px 0 0;
-            }
-            & p {
-                padding: 4px 16px;
-                margin: 0 0 0 6px;
-            }
+            & .nearTime li { margin-right: 6px;}
+            & li { background-size: 16px; }
+            & .times { gap: 6px; }
+            & .timeItem, & button { padding: 4px 16px; }
         }
     }
     .priceSection {
@@ -178,14 +188,8 @@
         row-gap: 8px;
         margin: 8px 0 18px;
         & .item {
-            & img {
-                width: 14px;
-                margin: 0 12px 0 0;
-            }
-            & p {
-                padding: 3px 12px;
-                margin: 0 0 0 6px;
-            }
+            & li { background-size: 14px; }
+            & .timeItem, & button { padding: 3px 12px; }
         }
     }
     .priceSection {
@@ -213,14 +217,8 @@
         row-gap: 6px;
         margin: 8px 0 15px;
         & .item {
-            & img {
-                width: 12px;
-                margin: 0 10px 0 0;
-            }
-            & p {
-                padding: 3px 10px;
-                margin: 0 0 0 4px;
-            }
+            & li { background-size: 12px; }
+            & .timeItem, & button { padding: 3px 10px; }
         }
     }
     .priceSection {
@@ -248,14 +246,13 @@
         row-gap: 6px;
         margin: 8px 0 10px;
         & .item {
-            & img {
-                width: 10px;
-                margin: 0 5px 0 0;
+            & .nearTime li { margin-right: 5px;}
+            & li { background-size: 10px; }
+            & .times {
+                gap: 5px;
+                font-size: 1rem;
             }
-            & p {
-                padding: 2px 6px;
-                margin: 0 0 0 5px;
-            }
+            & .timeItem, & button { padding: 2px 6px; }
         }
     }
     .priceSection {
@@ -290,20 +287,22 @@
         & .item {
             line-height: 1.4em;
             font-size: 1rem;
-            align-items: baseline;
-            width: 100%;
-            & img {
-                width: 18px;
-                margin: 0 20px 0 0;
+            & li {
+                background-size: 18px;
+                background-position: 0 1vh;
             }
+            & .nearTime li { margin-right: 0;}
+            & .times { gap: 10px; }
             & .nearTime {
-                flex-direction: column;
-                align-items: start;
-                & .times { margin: 7px 0 0; }
-                & p {
+                align-items: start !important;
+                flex-direction: column !important;
+                & .times {
+                    gap: 7px;
+                    margin: 0.5rem 0 0 2rem !important;
+                }
+                & .timeItem, & button {
                     font-size: 1em;
                     padding: 4px 18px;
-                    margin: 0 0 0 10px;
                     &:first-child { margin: 0; }
                 }
             }
@@ -340,16 +339,10 @@
     .programList {
         row-gap: 10px;
         & .item {
-            & img {
-                width: 16px;
-                margin: 0 20px 0 0;
-            }
+            & li { background-size: 16px; }
             & .nearTime {
-                & .times { margin: 7px 0 0; }
-                & p {
-                    padding: 2px 14px;
-                    margin: 0 0 0 7px;
-                }
+                & .times { gap: 7px; }
+                & .timeItem, & button { padding: 2px 14px; }
             }
         }
     }

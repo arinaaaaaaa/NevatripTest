@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import styles from "../styles/components/PlaceCard.module.scss"
 
 function setFlagColor() {
@@ -8,22 +10,16 @@ function setFlagColor() {
     }
 }
 
-function getTime(times) {
-    let shownTimes = []
-
-    if (times.length <= 3) shownTimes = times
-    else shownTimes = times.slice(0,2)
-
-    
-    return (
-        <div className={styles.times}>
-            {shownTimes.map((time) => <p>{time}</p>)}
-            {shownTimes.length === 2 && times.length !== 2 ? <p>ещё...</p> : null}
-        </div>
-    )
-} 
-
 export default function PlaceCard(props) {
+    const [shownTimes, setShownTimes] = useState(false)
+    let timesList
+
+    if (shownTimes == false) {
+        if (props.times.length <= 3) timesList = props.times
+        else timesList = props.times.slice(0,2)
+    }
+    else timesList = props.times
+
     return (
         <div className={styles.cardContainer}>
             <div className={styles.imageSection} style={{backgroundImage: `url(${props.image})`}}>
@@ -39,18 +35,21 @@ export default function PlaceCard(props) {
                     {
                         props.list ? props.list.map((item) => 
                             props.list[props.list.length - 1] !== item ?
-                            <div className={styles.item}>
-                                <img src="icons/marker.svg" alt="" />
-                                {item}
-                            </div>
+                            <ul className={styles.item}>
+                                <li>{item}</li>
+                            </ul>
                             :
-                            <div className={styles.item}>
-                                <img src="icons/marker.svg" alt="" />
-                                <div className={styles.nearTime}>
-                                    {item}
-                                    {props.times ? getTime(props.times) : null}
+                            <ul className={styles.item}>
+                                <div className={styles.nearTime} style={{flexDirection: shownTimes ? 'column' : 'row', alignItems: shownTimes ? 'start' : 'center'}}>
+                                    <li>{item}</li>
+                                    {props.times ?
+                                        <div className={styles.times} style={{marginLeft: shownTimes ? '2rem' : 0, marginTop: shownTimes ? '0.5rem' : '0'}}>
+                                            {timesList.map((time) => <p className={styles.timeItem}>{time}</p>)}
+                                            {props.times.length > 3 ? <button onClick={() => setShownTimes(!shownTimes)}>{!shownTimes? `ещё...` : `скрыть`}</button> : null}
+                                        </div>
+                                    : null}
                                 </div>
-                            </div>
+                            </ul>
                         ) : null
                     }
                 </div>
