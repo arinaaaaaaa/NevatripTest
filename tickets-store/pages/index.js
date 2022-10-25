@@ -4,15 +4,66 @@ import {diractions, timesAB, timesBA, counter, durationAB, costOneDiraction, cos
 import { customStyles, customStylesFirst, customStylesLast } from "../common/styles.js";
 import styles from '../styles/Home.module.scss';
 
+function getFinishTime(stringTime, duration = durationAB) {
+  let hours = parseInt(duration / 60);
+  let minutes = duration % 60;
+
+  var now = new Date();
+  var nowDateTime = now.toISOString();
+  var nowDate = nowDateTime.split('T')[0];
+  var target = new Date(nowDate + 'T' + stringTime);
+
+  target.setHours(target.getHours() + hours);
+  target.setMinutes(target.getMinutes() + minutes);
+
+  return(target);
+}
+
 function getResult(tickets, diraction, startTimeAB, startTimeBA) {
-  console.log(startTimeAB)
+
+  let finishTime = ""
+
+  if (diraction === "из A в B") finishTime = getFinishTime(startTimeAB)
+  else if (diraction === "из B в A") finishTime = getFinishTime(startTimeBA)
+  else finishTime = getFinishTime(startTimeAB, getDuration(startTimeAB, startTimeBA))
+
+  const hours = finishTime.getHours()
+  const minutes = (finishTime.getMinutes() < 10 ? '0': '') + finishTime.getMinutes()
+
   return (
     <>
-      <p>Вы выбрали {tickets} билета по маршруту {diraction} стоимостью {tickets*costOneDiraction}р.</p>
-      <p>Это путешествие займет у вас {durationAB} минут.</p>
-      <p>Теплоход отправляется в {startTimeAB}, а прибудет в 18-00.</p>
+      <p>Вы выбрали {tickets} билета по маршруту {diraction} стоимостью {diraction !== "из A в B и обратно в А" ? tickets*costOneDiraction : tickets*costTwoDiractions}р.</p>
+      <p>Это путешествие займет у вас { diraction !== "из A в B и обратно в А" ? durationAB : getDuration(startTimeAB, startTimeBA)} минут.</p>
+      <p>Теплоход отправляется в {diraction === "из B в A" ? startTimeBA : startTimeAB}, а прибудет в {hours + ":" + minutes}.</p>
     </>
   )
+}
+
+function getDuration(startTime, secondTime) {
+  let finishTime = getFinishTime(secondTime)
+
+  var now = new Date();
+  var nowDateTime = now.toISOString();
+  var nowDate = nowDateTime.split('T')[0];
+  var target = new Date(nowDate + 'T' + startTime);
+  console.log((finishTime - target)/60000)
+  return (finishTime - target)/60000
+
+}
+
+function filterTime(timeArray, startTime) {
+  const finishTime = getFinishTime(startTime)
+  let filteredArray = []
+
+  for (let i = 0; i < timeArray.length; i++) {
+    var now = new Date();
+    var nowDateTime = now.toISOString();
+    var nowDate = nowDateTime.split('T')[0];
+    var target = new Date(nowDate + 'T' + timeArray[i].value);
+    if (target > finishTime) filteredArray.push(timeArray[i])
+  }
+
+  return filteredArray
 }
 
 export default function Home() {
@@ -21,6 +72,18 @@ export default function Home() {
   const [timeAB, setTimeAB] = useState("")
   const [ticketsNum, setTicketsNum] = useState(0)
   const [showResult, setShowResult] = useState(false)
+
+  function changeDiraction(newDiraction) {
+    setDiraction(newDiraction);
+    setTimeAB("");
+    setTimeBA("");
+    setTicketsNum(0);
+    setShowResult(false);
+  }
+  function changeStartTime(newTime) {
+    setTimeAB(newTime)
+    if (!(filterTime(timesBA, newTime).find(e => e.value == timeBA && e.label == timeBA))) setTimeBA("")
+  }
 
   return (
     <div className={styles.container}>
@@ -34,7 +97,7 @@ export default function Home() {
               <Select
                 placeholder="Направление"
                 options={diractions}
-                onChange={e => setDiraction(e.value)}
+                onChange={e => changeDiraction(e.value)}
                 styles={customStylesFirst}
               />
             { diraction === "из B в A" ?
@@ -51,16 +114,16 @@ export default function Home() {
                 <Select
                   placeholder="Время отправления"
                   options={timesAB}
-                  onChange={e => setTimeAB(e.value)}
+                  onChange={e => changeStartTime(e.value)}
                   styles={customStyles}
                 />
               </>
             : null }
             {
-              diraction === "из A в B и обратно в А" ?
+              diraction === "из A в B и обратно в А" && timeAB !== "" ?
                 <Select
                   placeholder="Время возвращения"
-                  options={timesBA}
+                  options={filterTime(timesBA, timeAB)}
                   onChange={e => setTimeBA(e.value)}
                   styles={customStyles}
                 />
